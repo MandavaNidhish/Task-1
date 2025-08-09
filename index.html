@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Court Data Fetcher & Mini-Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">Court Data Fetcher & Mini-Dashboard</h1>
+                <p class="header-subtitle">Real-time case information and status tracking</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Search Form Section -->
+            <section class="search-section">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Search Case Information</h2>
+                    </div>
+                    <div class="card__body">
+                        <form id="searchForm" class="search-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="court" class="form-label">Select Court *</label>
+                                    <select id="court" name="court" class="form-control" required>
+                                        <option value="">Choose Court</option>
+                                        <option value="delhi_hc">Delhi High Court</option>
+                                        <option value="faridabad_dc">District Court Faridabad</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="caseType" class="form-label">Case Type *</label>
+                                    <select id="caseType" name="caseType" class="form-control" required>
+                                        <option value="">Select Case Type</option>
+                                        <option value="Criminal Appeal">Criminal Appeal</option>
+                                        <option value="Civil Suit">Civil Suit</option>
+                                        <option value="Writ Petition">Writ Petition</option>
+                                        <option value="Bail Application">Bail Application</option>
+                                        <option value="Family Dispute">Family Dispute</option>
+                                        <option value="Commercial Dispute">Commercial Dispute</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="caseNumber" class="form-label">Case Number *</label>
+                                    <input type="text" id="caseNumber" name="caseNumber" class="form-control" 
+                                           placeholder="e.g., CRL.A.798/2025" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="filingYear" class="form-label">Filing Year *</label>
+                                    <select id="filingYear" name="filingYear" class="form-control" required>
+                                        <option value="">Select Year</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn--primary btn--lg">
+                                    <span class="btn-text">Fetch Case Data (Real Scraping)</span>
+                                    <span class="btn-loading hidden">
+                                        <span class="loading-spinner"></span>
+                                        Scraping...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loadingSection" class="loading-section hidden">
+                <div class="card">
+                    <div class="card__body">
+                        <div class="loading-content">
+                            <div class="loading-spinner-large"></div>
+                            <h3 id="loadingTitle">Scraping case data from court website...</h3>
+                            <p id="loadingMessage">Please wait while we fetch the latest information</p>
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <p id="timeEstimate" class="time-estimate">Estimated time: 10-15 seconds</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section hidden">
+                <!-- Case Information -->
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Case Information</h3>
+                        <div id="dataSource" class="data-source-badge"></div>
+                    </div>
+                    <div class="card__body">
+                        <div class="case-info-grid">
+                            <div class="info-item">
+                                <label>Case Number:</label>
+                                <span id="resultCaseNumber"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>Court Name:</label>
+                                <span id="resultCourt"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>Case Type:</label>
+                                <span id="resultCaseType"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>Filing Date:</label>
+                                <span id="resultFilingDate"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>Next Hearing:</label>
+                                <span id="resultNextHearing"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>Case Status:</label>
+                                <span id="resultStatus" class="status"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parties & Advocates -->
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Parties & Advocates</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="parties-grid">
+                            <div class="party-section">
+                                <h4>Petitioner/Plaintiff</h4>
+                                <p id="resultPetitioner"></p>
+                                <small>Advocate: <span id="resultPetitionerAdvocate"></span></small>
+                            </div>
+                            <div class="party-section">
+                                <h4>Respondent/Defendant</h4>
+                                <p id="resultRespondent"></p>
+                                <small>Advocate: <span id="resultRespondentAdvocate"></span></small>
+                            </div>
+                            <div class="judge-section">
+                                <h4>Presiding Judge</h4>
+                                <p id="resultJudge"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders & Judgments -->
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Orders & Judgments</h3>
+                    </div>
+                    <div class="card__body">
+                        <div id="ordersContainer" class="orders-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search History -->
+            <section class="history-section">
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Search History</h3>
+                        <button id="clearHistory" class="btn btn--secondary btn--sm">Clear History</button>
+                    </div>
+                    <div class="card__body">
+                        <div id="historyContainer" class="history-container">
+                            <p class="no-history">No search history available</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Messages -->
+            <div id="errorModal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Error</h3>
+                        <button id="closeError" class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="errorMessage"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="closeErrorBtn" class="btn btn--secondary">Close</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
