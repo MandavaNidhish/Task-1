@@ -45,26 +45,8 @@ court-data-fetcher/
 - pip package manager
 - Internet connection for court website scraping
 
-### Installation & Setup
 
-1. **Download all project files** to a single directory
-
-2. **Install Python dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the application**:
-   ```bash
-   python app.py
-   ```
-
-4. **Access the application**:
-   ```
-   Open your browser and navigate to: http://localhost:5000
-   ```
-
-## 💻 Usage Instructions
+## Instructions
 
 ### 1. Search for Case Data
 1. Open the application in your browser
@@ -105,15 +87,7 @@ The application implements multiple strategies:
 - **OCR Processing**: Attempts to solve simple text CAPTCHAs
 - **Fallback Data**: Provides realistic sample data when scraping fails
 - **Transparent Messaging**: Informs users about scraping status
-
-### Example Scraping Flow
-```
-User Input → Flask API → HTTP Request → Court Website
-     ↓
-Database Storage ← Data Processing ← HTML Response ← Court Server
-     ↓
-User Interface ← JSON Response ← Parsed Data ← Database Query
-```
+- 
 
 ## 📊 Database Schema
 
@@ -134,7 +108,7 @@ The SQLite database includes three tables:
 - Links to parent case data
 - Includes PDF URLs for downloads
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### `POST /api/search`
 Search for case data with live scraping
@@ -156,7 +130,7 @@ Proxy PDF downloads from court websites
 ### `GET /api/health`
 Health check endpoint
 
-## 🛡️ Security & Legal Compliance
+## Security & Legal Compliance
 
 ### Respectful Scraping
 - **Request Delays**: Appropriate delays between requests
@@ -170,7 +144,7 @@ Health check endpoint
 - **No Commercial Use**: For educational and research purposes
 - **Data Protection**: Secure handling of scraped information
 
-## 🔧 Technical Features
+## Technical Features
 
 ### Backend (Flask)
 - Real HTTP requests to court websites
@@ -192,20 +166,6 @@ Health check endpoint
 - Data persistence and caching
 - Relationship management between tables
 
-## 🧪 Testing & Validation
-
-### Example Test Cases
-```
-Delhi High Court:
-- CRL.A.798/2025 (Criminal Appeal)
-- W.P.(C)11180/2025 (Writ Petition)
-- BAIL.APPLN.2872/2025 (Bail Application)
-
-Faridabad District Court:
-- CS.123/2024 (Civil Suit)
-- FAM.45/2024 (Family Dispute)
-```
-
 ### Validation Steps
 1. Start the application
 2. Test case search with valid case numbers
@@ -213,7 +173,6 @@ Faridabad District Court:
 4. Test error handling with invalid inputs
 5. Check PDF download functionality
 
-## 📋 Expected Behavior
 
 ### Successful Scraping
 - Real data extracted from court websites
