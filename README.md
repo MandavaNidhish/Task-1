@@ -227,72 +227,11 @@ Faridabad District Court:
 - User informed about scraping status
 - Realistic mock data provided for demonstration
 
-### Network/Site Issues
-- Graceful error handling
-- User-friendly error messages
-- Fallback to cached data if available
-- Detailed logging for troubleshooting
 
-## 🚨 Important Notes
 
-### Real Scraping Limitations
-- **CAPTCHA Challenges**: Some court websites use complex CAPTCHAs
-- **Site Structure Changes**: Court websites may modify their layouts
-- **Access Restrictions**: Some features may require authentication
-- **Rate Limiting**: Courts may limit automated access
 
-### Fallback Strategy
-When live scraping fails, the application provides:
-- Realistic sample data for demonstration
-- Clear indication of data source
-- Full functionality testing
-- Educational value preservation
 
-## 🎬 Demo Capabilities
 
-This application is perfect for demonstration because it:
-- **Shows real scraping attempts** with live HTTP requests
-- **Handles various scenarios** including success and failure cases
-- **Provides professional UI/UX** suitable for presentations
-- **Documents all activities** in the database
-- **Offers complete functionality** even when scraping fails
 
-## 📞 Troubleshooting
 
-### Common Issues
 
-**"Plain page" or no styling:**
-- Check that all files (index.html, style.css, app.js) are in the same directory
-- Verify the Flask server is running on port 5000
-- Clear browser cache and try again
-
-**"Database errors":**
-- Ensure write permissions in the application directory
-- Check that SQLite is properly installed
-- Restart the application to reinitialize database
-
-**"Network errors during scraping":**
-- Verify internet connectivity
-- Check if court websites are accessible
-- Review application logs for detailed error messages
-
-**"Missing dependencies":**
-- Run `pip install -r requirements.txt` again
-- Ensure Python 3.8+ is installed
-- Check for conflicting package versions
-
-### Support Resources
-- Check Flask application logs for detailed error information
-- Verify all project files are present and correctly named
-- Test with sample case numbers provided in documentation
-- Review database contents using SQLite browser tools
-
-## 📄 License
-
-This project is provided for educational and research purposes. Please use responsibly and in accordance with the terms of service of the respective court websites.
-
----
-
-**Ready to deploy and demonstrate! 🚀**
-
-The application provides a complete implementation of the Court Data Fetcher requirements with real scraping capabilities, professional interface, and comprehensive functionality.
